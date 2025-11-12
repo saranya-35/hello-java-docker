@@ -4,40 +4,25 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/your-org/your-repo.git'
+                git url: 'https://github.com/saranya-35/hello-java-docker.git'
             }
         }
 
         stage('Build') {
             steps {
                 script {
-		    dockerIMage = docker.build("your-org/hello-world-java")
+                    dockerImage = docker.build("saranya-35/hello-world-java")
                 }
             }
         }
 
         stage('Run Docker Image') {
             steps {
-		script {
- 		    dockerImage.run()
-                       }
-		 }
-	      }
-        }
-        
-        stage('Deploy Staging') {
-            steps {
-                sh 'echo "Deploying to Staging Environment..."'
+                script {
+                    dockerImage.run()
+                }
             }
         }
     }
-
-    post {
-        always {
-            cleanWs()
-        }
-        failure {
-            echo "Pipeline FAILED. Check console output."
-        }
-    }
 }
+        
